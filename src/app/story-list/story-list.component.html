@@ -1,0 +1,55 @@
+<div class="mainView">
+  <!-- Header comes here -->
+  <app-header></app-header>
+
+  <div class="pageControls">
+    <a class="orange no-underline" (click)="changePage(-1)">< prev</a>
+    <p *ngIf="!loading">{{ page }}/{{ PAGES }}</p>
+    <p *ngIf="loading">... / ...</p>
+    <a class="orange no-underline" (click)="changePage(1)"> next > </a>
+  </div>
+  <main class="news-list">
+    <ul>
+      <div
+        *ngIf="loading"
+        class="spinner-border mt-3"
+        role="status"
+        style="color: #f26522;"
+      >
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <li class="storyContainer" *ngFor="let story of stories">
+        <span class="storyScore">{{ story.score }}</span>
+        <span class="title">
+          <a
+            class="undecorated"
+            href="{{ story.url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ story.title }} &nbsp;
+          </a>
+          <span class="host">{{ story.url | getdomain }}</span>
+        </span>
+        <br />
+
+        <span class="meta">
+          <span class="by">
+            by
+            <a class="orange"> {{ story.by }} </a>
+          </span>
+          <span class="time"> &nbsp;{{ story.time | timepassed }}</span>
+
+          <span class="comments-link">
+            {{ story.descendants > 0 && " | " }}
+            <a class="orange" *ngIf="story.descendants">
+              {{ story.descendants }}
+              {{ story.descendants === 1 ? "comment" : "comments" }}
+            </a>
+          </span>
+        </span>
+      </li>
+    </ul>
+  </main>
+</div>

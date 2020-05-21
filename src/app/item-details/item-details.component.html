@@ -1,0 +1,37 @@
+<div className="mainContainer">
+  <div className="itemDetailsContainer">
+    <div className="d-flex flex-column">
+      <h5>
+        <a
+          href="{{ itemDetails.url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline"
+        >
+          {{ itemDetails.title }}
+        </a>
+        <small>{{ itemDetails.url | getdomain }}</small>
+      </h5>
+
+      <span>
+        {{ itemDetails.score }} points | by&nbsp;
+        <!-- <Link href="/user/[id]" as={`/user/${itemDetails.by}`}> -->
+        <a>{{ itemDetails.by }}</a>
+        <!-- </Link> -->
+        &nbsp;{{ itemDetails.time | timepassed }}
+      </span>
+    </div>
+  </div>
+
+  <main className="mainCommentsContainer">
+    <p><!-- {!loading && calculateComments(commentTree)} Comments --></p>
+
+    <p *ngIf="loading">
+      Loading...
+    </p>
+    <hr />
+    <!-- {commentTreeArray.map((comment) => (
+      <Comment key={comment.id} comment={comment} itemId={itemId} />
+    ))} -->
+  </main>
+</div>
